@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
+ 
+
 
 const PORT = 8080;
 
@@ -33,6 +35,7 @@ module.exports = {
             use: 'svg-url-loader'
         }]
     },
+    
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
@@ -51,6 +54,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            inject: true,
             template: 'src/index.html',
             excludeAssets: [/doc.js/]
         }),
@@ -59,6 +63,7 @@ module.exports = {
             template: 'documentation/doc.html',
             excludeAssets: [/index.js/]
         }),
+       
         new HtmlWebpackExcludeAssetsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new TSLintPlugin({
